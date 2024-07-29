@@ -5,8 +5,14 @@ on:
       - main
 jobs:
   test:
+    environment: QA
+    env:
+      env_vars: ${{ vars.QA_VARS }}
     runs-on: ubuntu-latest
     steps:
+      - name: output env vars
+        run: |
+          echo "env vars of QA is : ${{ env.env_vars }} "
       - name: Get Code -checkout
         uses: actions/checkout@v3
       - name: Install NodeJs
@@ -48,11 +54,16 @@ jobs:
           path: dist
          
   deploy:
+    environment: prod
     needs: build
     env:
       GLOBAL: ${{ vars.GLOBAL }}
+      env_vars: ${{ vars.PROD_VARS }}
     runs-on: ubuntu-latest
     steps:
+      - name: output env vars
+        run: |
+          echo "env vars of PROD is : ${{ env.env_vars }} "
       - name: Get Build Artifacts
         uses: actions/download-artifact@v4
         with:
