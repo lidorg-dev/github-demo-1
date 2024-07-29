@@ -49,6 +49,8 @@ jobs:
          
   deploy:
     needs: build
+    env:
+      GLOBAL: ${{ vars.GLOBAL }}
     runs-on: ubuntu-latest
     steps:
       - name: Get Build Artifacts
