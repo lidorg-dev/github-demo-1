@@ -62,5 +62,5 @@ jobs:
       - name: deploy
         run: echo "Deploying ..."
       - name: Output Information
-        run: echo "Global var: ${{ env.GLOBAL }}"
-
+        run: |
+          echo "Global var: ${{ env.GLOBAL }}"
